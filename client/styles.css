@@ -7,6 +7,10 @@ body {
    justify-content: center;
 }
 
+.nav-list > li {
+   margin: 5rem 2rem 0.5rem 2rem;
+}
+
 .grid-container {
    display: grid;
    grid-template-columns: [col1-start] auto [col2-start] 37.5% [col3-start] 37.5% [col4-start] auto;
@@ -23,6 +27,21 @@ body {
    grid-column: 2 / span 2;
    grid-row: row2-start / row3-start;
    background-color: #F1F2EE;
+}
+
+#poke-header {
+   display: flex;
+}
+
+.page-turn {
+   width: 100%;
+   background-color: red;
+   text-align: center;
+}
+
+#poke-title {
+   width: 100%;
+   text-align: center;
 }
 
 .grid-row-3 {
