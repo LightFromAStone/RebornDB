@@ -2,9 +2,14 @@ body {
    background-color: #0C0F0A;
 }
 
+.nav-list {
+   display: flex;
+   justify-content: center;
+}
+
 .grid-container {
    display: grid;
-   grid-template-columns: [col1-start] auto [col2-start] auto [col3-start] auto [col4-start] auto;
+   grid-template-columns: [col1-start] auto [col2-start] 37.5% [col3-start] 37.5% [col4-start] auto;
    grid-template-rows: [row1-start] auto [row2-start] auto [row3-start] auto [row4-start] auto [row4-start] auto;
 }
 
@@ -23,6 +28,7 @@ body {
 .grid-row-3 {
    grid-column: 2 / span 2;
    grid-row: row3-start / row4-start;
+   max-width: 1200px;
    background-color: #F1F2EE;
 
 }
