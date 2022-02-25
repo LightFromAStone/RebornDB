@@ -1,11 +1,18 @@
+CREATE TYPE EXP AS ENUM ('Erratic', 'Fast', 'Medium Fast', 'Medium Slow', 'Slow', 'Fluctuating');
+
+CREATE TABLE type (
+   type_id SERIAL PRIMARY KEY,
+   type_name VARCHAR(20)
+);
+
 CREATE TABLE pokemon (
    pokemon_id SERIAL PRIMARY KEY,
    pokemon_name VARCHAR(50) NOT NULL,
    pokemon_text_id VARCHAR(50) NOT NULL,
-   type1 VARCHAR(20) NOT NULL,
-   type2 VARCHAR(20),
-   gender_rate VARCHAR(30) NOT NULL,
-   growth_rate VARCHAR(30) NOT NULL,
+   type1 INT NOT NULL REFERENCES type(type_id),
+   type2 INT REFERENCES type(type_id),
+   gender_rate NUMERIC(4, 3) NOT NULL,
+   growth_type EXP NOT NULL,
    catch_rate INT NOT NULL,
    hatch_steps INT NOT NULL
 );
@@ -65,11 +72,11 @@ CREATE TABLE moves (
    move_name VARCHAR(50) NOT NULL,
    function_code_id INT NOT NULL REFERENCES function_code(function_code_id),
    base_power INT NOT NULL,
-   move_type VARCHAR(20) NOT NULL,
+   move_type INT NOT NULL REFERENCES type(type_id),
    damage_category VARCHAR(20) NOT NULL,
    accuracy INT NOT NULL,
    total_pp INT NOT NULL,
-   effect_chance INT NOT NULL,
+   effect_chance NUMERIC(3, 2) NOT NULL,
    target VARCHAR(50) NOT NULL,
    priority INT NOT NULL,
    move_description VARCHAR(500) NOT NULL
