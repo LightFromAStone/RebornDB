@@ -1,20 +1,25 @@
 CREATE TYPE EXP AS ENUM ('Erratic', 'Fast', 'Medium Fast', 'Medium Slow', 'Slow', 'Fluctuating');
 
-CREATE TABLE type (
-   type_id SERIAL PRIMARY KEY,
-   type_name VARCHAR(20)
+CREATE TABLE pokemon_type (
+   pokemon_type_id SERIAL PRIMARY KEY,
+   pokemon_type_name VARCHAR(20)
 );
 
-CREATE TABLE pokemon (
-   pokemon_id SERIAL PRIMARY KEY,
+CREATE TABLE pokemon_base (
+   pokemon_base_id SERIAL PRIMARY KEY,
    pokemon_name VARCHAR(50) NOT NULL,
-   pokemon_text_id VARCHAR(50) NOT NULL,
-   type_1 INT NOT NULL REFERENCES type(type_id),
-   type_2 INT REFERENCES type(type_id),
    gender_rate NUMERIC(4, 3) NOT NULL,
    growth_type EXP NOT NULL,
    catch_rate INT NOT NULL,
    hatch_steps INT NOT NULL
+);
+
+CREATE TABLE pokemon (
+   pokemon_id SERIAL PRIMARY KEY,
+   pokemon_base_id INT NOT NULL REFERENCES pokemon_base(pokemon_base_id)
+   pokemon_text_id VARCHAR(50) NOT NULL,
+   pokemon_type_1 INT NOT NULL REFERENCES type(pokemon_type_id),
+   pokemon_type_2 INT REFERENCES pokemon_type(pokemon_type_id),
 );
 
 CREATE TABLE effort_points (
@@ -72,9 +77,9 @@ CREATE TABLE moves (
    move_name VARCHAR(50) NOT NULL,
    function_code_id INT NOT NULL REFERENCES function_code(function_code_id),
    base_power INT NOT NULL,
-   move_type INT NOT NULL REFERENCES type(type_id),
+   move_type INT NOT NULL REFERENCES pokemon_type(pokemon_type_id),
    damage_category VARCHAR(20) NOT NULL,
-   accuracy INT NOT NULL,
+   accuracy NUMERIC(3, 2) NOT NULL,
    total_pp INT NOT NULL,
    effect_chance NUMERIC(3, 2) NOT NULL,
    target VARCHAR(50) NOT NULL,
@@ -108,6 +113,6 @@ CREATE TABLE egg_groups (
 
 CREATE TABLE pokemon_egg_groups (
    pokemon_egg_group_id SERIAL PRIMARY KEY,
-   pokemon_id INT NOT NULL REFERENCES pokemon(pokemon_id),
+   pokemon_base_id INT NOT NULL REFERENCES pokemon_base(pokemon_base_id),
    egg_group_id INT NOT NULL REFERENCES egg_groups(egg_group_id)
 );
