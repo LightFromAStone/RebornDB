@@ -1,31 +1,21 @@
-
+const Nightmare = require('nightmare');
+const nightmare = Nightmare();
+const fs = require('fs');
 
 const {matchMove} = require('./moves-array.js')
 
-// const pokesToGet = ['Raichu'];
-
 const pokesToGet = ['Rattata', 'Raticate', 'Raichu', 'Sandshrew', 'Sandslash', 'Vulpix', 'Ninetales', 'Diglett', 'Dugtrio', 'Meowth', 'Persian', 'Geodude', 'Graveler', 'Golem', 'Grimer', 'Muk', 'Exeggutor', 'Marowak'];
+// const pokesToGet = ['Rattata'];
 
-
-async function getMoves(pkmn) {
-   const Nightmare = require('nightmare');
-   const nightmare = Nightmare();
-   const fs = require('fs');
-
-   // console.log(`Now getting moves for Alolan ${pkmn}`)
-
+for (p = 0; p < pokesToGet.length; p++) {
+   console.log(pokesToGet[p]);
    let selector = 'h6';
    // let URL = process.argv[2] ? `https://bulbapedia.bulbagarden.net/wiki/${process.argv[2]}_(Pok%C3%A9mon)/Generation_VII_learnset#By_leveling_up` : `https://bulbapedia.bulbagarden.net/wiki/Vulpix_(Pok%C3%A9mon)/Generation_VII_learnset#By_leveling_up`;
-
    // let searchName = process.argv[2] ? `Alolan ${process.argv[2]}` : 'Alolan Vulpix';
+   let URL = `https://bulbapedia.bulbagarden.net/wiki/${pokesToGet[p]}_(Pok%C3%A9mon)/Generation_VII_learnset#By_leveling_up`;
+   let searchName = `Alolan ${pokesToGet[p]}`;
 
-   // let URL = `https://bulbapedia.bulbagarden.net/wiki/Sandshrew_(Pok%C3%A9mon)/Generation_VII_learnset#By_leveling_up`;
-   // let searchName = `Alolan Sandshrew`;
-
-   let URL = `https://bulbapedia.bulbagarden.net/wiki/${pkmn}_(Pok%C3%A9mon)/Generation_VII_learnset#By_leveling_up`;
-   let searchName = `Alolan ${pkmn}`;
-
-   await nightmare
+   nightmare
    .goto(URL)
    .wait(2000)
    .evaluate((selector, searchName) => {
@@ -41,16 +31,13 @@ async function getMoves(pkmn) {
       for (let i = 0; i < 4; i++) {
          let movesTable = neededTables[i].nextElementSibling;
          let body = movesTable.firstElementChild.firstElementChild.nextElementSibling.firstElementChild.firstElementChild.firstElementChild.nextElementSibling;
-         let excpetions = ['Alolan Raichu', 'Alolan Exeggutor', 'Alolan Marowak'];
-         if (i=== 2 && excpetions.includes(searchName)) { i++; data.push(['reference']); }
          if(i === 0) {         
             for (tr of body.querySelectorAll('tr')) {
                let first = tr.firstElementChild;
                resultsArray.push(first.innerText);
                let second = first.nextElementSibling;
                let moveName = '';
-               // if (second.querySelector('b') != null) {
-               if (second.firstElementChild.tagName === 'B') {
+               if (second.querySelector('b') != null) {
                   moveName = second.firstElementChild.firstElementChild.firstElementChild.innerText;
                }
                else {
@@ -63,8 +50,7 @@ async function getMoves(pkmn) {
             for (tr of body.querySelectorAll('tr')) {
                let third = tr.firstElementChild.nextElementSibling.nextElementSibling;
                let moveName = '';
-               // if (third.querySelector('b') != null) {
-               if (third.firstElementChild.tagName === 'B') {
+               if (third.querySelector('b') != null) {
                   moveName = third.firstElementChild.firstElementChild.firstElementChild.innerText;
                }
                else {
@@ -74,13 +60,10 @@ async function getMoves(pkmn) {
             }
          }
          else if (i === 2) {
-            // let excpetions = ['Alolan Raichu', 'Alolan Exeggutor', 'Alolan Marowak'];
-            // if (excpetions.includes(searchName)) { data.push(['']); continue; }
             for (tr of body.querySelectorAll('tr')) {
                let second = tr.firstElementChild.nextElementSibling;
                let moveName = '';
-               // if (second.querySelector('b') != null) {
-               if (second.firstElementChild.tagName === 'B') {
+               if (second.querySelector('b') != null) {
                   moveName = second.firstElementChild.firstElementChild.firstElementChild.innerText;
                }
                else {
@@ -93,8 +76,7 @@ async function getMoves(pkmn) {
             for (tr of body.querySelectorAll('tr')) {
                let second = tr.querySelector('td')
                let moveName = '';
-               // if (second.querySelector('b') != null) {
-               if (second.firstElementChild.tagName === 'B') {
+               if (second.querySelector('b') != null) {
                   moveName = second.firstElementChild.firstElementChild.firstElementChild.innerText;
                }
                else {
@@ -125,12 +107,10 @@ async function getMoves(pkmn) {
          }
          writeData = writeData.slice(0, -1);
          writeData += '\nBreeding:\n';
-         if(data[2][0] != 'reference') {
-            for(let i = 0; i < data[2].length; i++) {
-               writeData += `${matchMove(data[2][i])},`
-            }
-            writeData = writeData.slice(0, -1);
+         for(let i = 0; i < data[2].length; i++) {
+            writeData += `${matchMove(data[2][i])},`
          }
+         writeData = writeData.slice(0, -1);
          writeData += '\nTutoring:\n';
          for(let i = 0; i < data[3].length; i++) {
             writeData += `${matchMove(data[3][i])},`
@@ -140,10 +120,6 @@ async function getMoves(pkmn) {
          fs.appendFile('alolan-move-data.txt', writeData, err => {if(err) {console.log(err)}});
    })
    .catch(error => {
-      console.error(`Failed on ${searchName}`, error)
+      console.error('Failed:', error)
    })
-}
-
-for (p = 0; p < pokesToGet.length; p++) {
-   getMoves(pokesToGet[p]);
 }
