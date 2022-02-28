@@ -1,4 +1,5 @@
 CREATE TYPE EXPGROWTH AS ENUM ('Erratic', 'Fast', 'Medium Fast', 'Medium Slow', 'Slow', 'Fluctuating');
+CREATE TYPE MOVECLASS AS ENUM ('Physical', 'Special', 'Status');
 CREATE TYPE POCKET AS ENUM ('Items', 'Medicine', 'Poke Balls', 'TMs & HMs', 'Berries', 'Mail', 'Battle Items', 'Key Items');
 
 CREATE TABLE pokemon_type (
@@ -8,17 +9,17 @@ CREATE TABLE pokemon_type (
 
 CREATE TABLE in_battle_use (
    in_battle_use_id SERIAL PRIMARY KEY,
-   useability_definition VARCHAR(50) NOT NULL
+   useability_definition VARCHAR(300) NOT NULL
 );
 
 CREATE TABLE out_battle_use (
    out_battle_use_id SERIAL PRIMARY KEY,
-   useability_definition VARCHAR(50) NOT NULL
+   useability_definition VARCHAR(300) NOT NULL
 );
 
 CREATE TABLE special_items_use (
    special_items_use_id SERIAL PRIMARY Key,
-   useability_definition VARCHAR(50) NOT NULL
+   useability_definition VARCHAR(300) NOT NULL
 );
 
 CREATE TABLE game_items (
@@ -44,11 +45,10 @@ CREATE TABLE pokemon_base (
 
 CREATE TABLE pokemon (
    pokemon_id SERIAL PRIMARY KEY,
-   pokemon_base_id INT NOT NULL REFERENCES pokemon_base(pokemon_base_id)
+   pokemon_base_id INT NOT NULL REFERENCES pokemon_base(pokemon_base_id),
    pokemon_text_id VARCHAR(50) NOT NULL,
-   pokemon_type_1 INT NOT NULL REFERENCES type(pokemon_type_id),
+   pokemon_type_1 INT NOT NULL REFERENCES pokemon_type(pokemon_type_id),
    pokemon_type_2 INT REFERENCES pokemon_type(pokemon_type_id),
-   wild_item_id
 );
 
 CREATE TABLE wild_held_items (
@@ -60,7 +60,7 @@ CREATE TABLE wild_held_items (
 
 CREATE TABLE effort_points (
    effort_points_id SERIAL PRIMARY KEY,
-   pokemon_id INT NOT NULL REFERENCES pokemon(pokemon_id),
+   pokemon_base_id INT NOT NULL REFERENCES pokemon_base(pokemon_base_id),
    ev_hp INT NOT NULL,
    ev_attack INT NOT NULL,
    ev_defense INT NOT NULL,
@@ -114,12 +114,12 @@ CREATE TABLE moves (
    function_code_id INT NOT NULL REFERENCES function_code(function_code_id),
    base_power INT NOT NULL,
    move_type INT NOT NULL REFERENCES pokemon_type(pokemon_type_id),
-   damage_category VARCHAR(20) NOT NULL,
+   damage_category MOVECLASS NOT NULL,
    accuracy NUMERIC(3, 2) NOT NULL,
    total_pp INT NOT NULL,
    effect_chance NUMERIC(3, 2) NOT NULL,
-   target VARCHAR(50) NOT NULL,
-   priority INT NOT NULL,
+   move_target VARCHAR(50) NOT NULL,
+   move_priority INT NOT NULL,
    move_description VARCHAR(500) NOT NULL
 );
 

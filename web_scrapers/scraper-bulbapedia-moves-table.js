@@ -1,8 +1,4 @@
-
-
 const {matchMove} = require('./moves-array.js')
-
-// const pokesToGet = ['Raichu'];
 
 const pokesToGet = ['Rattata', 'Raticate', 'Raichu', 'Sandshrew', 'Sandslash', 'Vulpix', 'Ninetales', 'Diglett', 'Dugtrio', 'Meowth', 'Persian', 'Geodude', 'Graveler', 'Golem', 'Grimer', 'Muk', 'Exeggutor', 'Marowak'];
 
@@ -12,15 +8,7 @@ async function getMoves(pkmn) {
    const nightmare = Nightmare();
    const fs = require('fs');
 
-   // console.log(`Now getting moves for Alolan ${pkmn}`)
-
    let selector = 'h6';
-   // let URL = process.argv[2] ? `https://bulbapedia.bulbagarden.net/wiki/${process.argv[2]}_(Pok%C3%A9mon)/Generation_VII_learnset#By_leveling_up` : `https://bulbapedia.bulbagarden.net/wiki/Vulpix_(Pok%C3%A9mon)/Generation_VII_learnset#By_leveling_up`;
-
-   // let searchName = process.argv[2] ? `Alolan ${process.argv[2]}` : 'Alolan Vulpix';
-
-   // let URL = `https://bulbapedia.bulbagarden.net/wiki/Sandshrew_(Pok%C3%A9mon)/Generation_VII_learnset#By_leveling_up`;
-   // let searchName = `Alolan Sandshrew`;
 
    let URL = `https://bulbapedia.bulbagarden.net/wiki/${pkmn}_(Pok%C3%A9mon)/Generation_VII_learnset#By_leveling_up`;
    let searchName = `Alolan ${pkmn}`;

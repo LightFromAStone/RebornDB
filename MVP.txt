@@ -1,0 +1,57 @@
+--- MVP ---
+- User can see a list of all Pokemon
+- Each Pokemon has its own page with info about it (ONLY info relevant to Pkmn Reborn)
+- User can click on a move to get inline info about the move and what other Pokemon learn that move
+- User can submit feedback (report incorrect or missing info, request a feature, etc.)
+
+- Name -
+RebornDB
+
+--- TODO ---
+- Design Tables for Pokemon & Moves
+- Design Table(s) for feedback
+- Create Tables
+- Seed tables with data
+- Create Poke-list page
+- Create individual Pokemon page
+- Create feedback page
+- Create endpoints for GET and POST requests
+- Create front-end queries
+
+
+
+--- Point Checklist --- 
+- Projected Points (105/125)
+
+--- Planning ---
+* project includes a list of MVP features
+- project includes a data model
+
+--- MVP ---
+* app has at least 3 main features
+* front end makes a request to the server and handles the response
+* front end is interactive
+* app has custom styling
+
+--- Front End ---
+* app has at least 5 semantic tags
+* app includes 1 view
+- app includes 1+ additional view(s)
+- styling includes flexbox
+
+--- Server ---
+* app includes a GET endpoint and handler function
+* app includes a POST endpoint and handler function
+- app utilizes Sequelize
+- project includes at least 1 controller file
+
+--- Database ---
+- project includes a seed file or function
+- app uses 1 table
+- app uses 1+ additional tables
+- app uses a foreign key and join
+
+--- Presentation ---
+- discusses project purpose and demonstrates MVP *
+- does not discuss broken/unimplemented features
+- recording is between 2-3 minutes
