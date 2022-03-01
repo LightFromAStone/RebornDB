@@ -133,7 +133,7 @@ CREATE TABLE pokemon_moves (
 CREATE TABLE technical_machines (
    technical_machine_id SERIAL PRIMARY KEY,
    game_item_id INT NOT NULL REFERENCES game_items(game_item_id),
-   move_taught INT NOT NULL REFERENCES moves(move_id)
+   move_id INT NOT NULL REFERENCES moves(move_id)
 );
 
 CREATE TABLE flags (
