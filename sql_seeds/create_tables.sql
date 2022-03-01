@@ -108,8 +108,7 @@ CREATE TABLE function_code (
 );
 
 CREATE TABLE moves (
-   move_id SERIAL PRIMARY KEY,
-   move_text_id VARCHAR(50) NOT NULL,
+   move_id VARCHAR(50) PRIMARY KEY,
    move_name VARCHAR(50) NOT NULL,
    function_code_id INT NOT NULL REFERENCES function_code(function_code_id),
    base_power INT NOT NULL,
@@ -133,7 +132,7 @@ CREATE TABLE pokemon_moves (
 CREATE TABLE technical_machines (
    technical_machine_id SERIAL PRIMARY KEY,
    game_item_id INT NOT NULL REFERENCES game_items(game_item_id),
-   move_id INT NOT NULL REFERENCES moves(move_id)
+   move_id VARCHAR(50) NOT NULL REFERENCES moves(move_id)
 );
 
 CREATE TABLE flags (
