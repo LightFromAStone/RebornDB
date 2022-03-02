@@ -98,22 +98,20 @@ CREATE TABLE evolutions (
 );
 
 CREATE TABLE function_code (
-   function_code_id SERIAL PRIMARY KEY,
-   function_code_value CHAR(3) NOT NULL,
+   function_code_id CHAR(3) PRIMARY KEY,
    function_code_description VARCHAR(500)
 );
 
 CREATE TABLE moves (
    move_id VARCHAR(50) PRIMARY KEY,
    move_name VARCHAR(50) NOT NULL,
-   function_code_id INT NOT NULL REFERENCES function_code(function_code_id),
+   function_code_id CHAR(3) NOT NULL REFERENCES function_code(function_code_id),
    base_power INT NOT NULL,
    move_type VARCHAR(20) NOT NULL REFERENCES pokemon_type(pokemon_type_id),
    damage_category MOVECLASS NOT NULL,
    accuracy NUMERIC(3, 2) NOT NULL,
    total_pp INT NOT NULL,
    effect_chance NUMERIC(3, 2) NOT NULL,
-   move_target VARCHAR(50) NOT NULL,
    move_priority INT NOT NULL,
    move_description VARCHAR(500) NOT NULL
 );
@@ -133,8 +131,8 @@ CREATE TABLE technical_machines (
 
 CREATE TABLE flags (
    flag_id SERIAL PRIMARY KEY,
-   flag_value CHAR(1),
-   flag_description VARCHAR(100)
+   flag_value CHAR(1) NOT NULL,
+   flag_description VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE move_flags (
