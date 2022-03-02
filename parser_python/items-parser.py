@@ -37,10 +37,10 @@ tm_file.write('INSERT INTO technical_machines (game_item_id, move_id)\nVALUES\n'
 
 pockets = ['', 'Items', 'Medicine', 'Poke Balls', 'TMs & HMs', 'Berries', 'Mail', 'Battle Items', 'Key Items']
 
-index = 0
+# index = 0
 
 for line in in_file:
-   index += 1
+   # index += 1
    line = line.rstrip()
    split_for_description = line.split('"')
    split_one = split_for_description[0].split(',')
@@ -64,7 +64,7 @@ for line in in_file:
       out_file.write('),\n')
       
    if (len(split_two) > 4 and split_two[4] != ""):
-      tm_file.write(f'({index}, "{split_two[4]}"),\n')
+      tm_file.write(f'({split_one[1]}, "{split_two[4]}"),\n')
    
    
 in_file.close()

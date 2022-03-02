@@ -4,7 +4,7 @@ CREATE TYPE POCKET AS ENUM ('Items', 'Medicine', 'Poke Balls', 'TMs & HMs', 'Ber
 
 CREATE TABLE pokemon_type (
    pokemon_type_id SERIAL PRIMARY KEY,
-   pokemon_type_name VARCHAR(20)
+   pokemon_type_name VARCHAR(20)          
 );
 
 CREATE TABLE in_battle_use (
@@ -23,8 +23,7 @@ CREATE TABLE special_items_use (
 );
 
 CREATE TABLE game_items (
-   game_item_id SERIAL PRIMARY KEY,
-   game_item_text_id VARCHAR(30) NOT NULL,
+   game_item_id VARCHAR(30) PRIMARY KEY,
    game_item_name VARCHAR(30) NOT NULL,
    bag_pocket POCKET NOT NULL,
    game_item_price INT NOT NULL,
@@ -44,17 +43,16 @@ CREATE TABLE pokemon_base (
 );
 
 CREATE TABLE pokemon (
-   pokemon_id SERIAL PRIMARY KEY,
+   pokemon_id VARCHAR(50) PRIMARY KEY,
    pokemon_base_id INT NOT NULL REFERENCES pokemon_base(pokemon_base_id),
-   pokemon_text_id VARCHAR(50) NOT NULL,
    pokemon_type_1 INT NOT NULL REFERENCES pokemon_type(pokemon_type_id),
-   pokemon_type_2 INT REFERENCES pokemon_type(pokemon_type_id),
+   pokemon_type_2 INT REFERENCES pokemon_type(pokemon_type_id)
 );
 
 CREATE TABLE wild_held_items (
    wild_held_item_id SERIAL PRIMARY KEY,
-   game_item_id INT NOT NULL REFERENCES game_items(game_item_id),
-   pokemon_id INT NOT NULL REFERENCES pokemon(pokemon_id),
+   game_item_id VARCHAR(30) NOT NULL REFERENCES game_items(game_item_id),
+   pokemon_id VARCHAR(50) NOT NULL REFERENCES pokemon(pokemon_id),
    held_chance NUMERIC(3,2) NOT NULL
 );
 
@@ -71,7 +69,7 @@ CREATE TABLE effort_points (
 
 CREATE TABLE base_stats (
    base_stats_id SERIAL PRIMARY KEY,
-   pokemon_id INT NOT NULL REFERENCES pokemon(pokemon_id),
+   pokemon_id VARCHAR(50) NOT NULL REFERENCES pokemon(pokemon_id),
    hp INT NOT NULL,
    attack INT NOT NULL,
    defense INT NOT NULL,
@@ -81,23 +79,22 @@ CREATE TABLE base_stats (
 );
 
 CREATE TABLE abilities (
-   ability_id SERIAL PRIMARY KEY,
-   ability_text_id VARCHAR(30) NOT NULL,
+   ability_id VARCHAR(30) PRIMARY KEY,
    ability_name VARCHAR(30) NOT NULL,
    ability_description VARCHAR(500)
 );
 
 CREATE TABLE pokemon_abilities (
    pkmn_ability_id SERIAL PRIMARY KEY,
-   pokemon_id INT NOT NULL REFERENCES pokemon(pokemon_id),
-   ability_id INT NOT NULL REFERENCES abilities(ability_id),
+   pokemon_id VARCHAR(50) NOT NULL REFERENCES pokemon(pokemon_id),
+   ability_id VARCHAR(30) NOT NULL REFERENCES abilities(ability_id),
    is_hidden BOOLEAN NOT NULL
 );
 
 CREATE TABLE evolutions (
    evolution_id SERIAL PRIMARY KEY,
-   pokemon_id INT NOT NULL REFERENCES pokemon(pokemon_id),
-   evolves_into INT NOT NULL REFERENCES pokemon(pokemon_id),
+   pokemon_id VARCHAR(50) NOT NULL REFERENCES pokemon(pokemon_id),
+   evolves_into VARCHAR(50) NOT NULL REFERENCES pokemon(pokemon_id),
    evolution_method VARCHAR(100)
 );
 
@@ -124,14 +121,14 @@ CREATE TABLE moves (
 
 CREATE TABLE pokemon_moves (
    pokemon_moves_id SERIAL PRIMARY KEY,
-   pokemon_id INT NOT NULL REFERENCES pokemon(pokemon_id),
-   move_id INT NOT NULL REFERENCES moves(move_id),
+   pokemon_id VARCHAR(50) NOT NULL REFERENCES pokemon(pokemon_id),
+   move_id VARCHAR(50) NOT NULL REFERENCES moves(move_id),
    learn_method VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE technical_machines (
    technical_machine_id SERIAL PRIMARY KEY,
-   game_item_id INT NOT NULL REFERENCES game_items(game_item_id),
+   game_item_id VARCHAR(30) NOT NULL REFERENCES game_items(game_item_id),
    move_id VARCHAR(50) NOT NULL REFERENCES moves(move_id)
 );
 
@@ -143,7 +140,7 @@ CREATE TABLE flags (
 
 CREATE TABLE move_flags (
    move_flag_id SERIAL PRIMARY KEY,
-   move_id INT NOT NULL REFERENCES moves(move_id),
+   move_id VARCHAR(50) NOT NULL REFERENCES moves(move_id),
    flag_id INT NOT NULL REFERENCES flags(flag_id)
 );
 
