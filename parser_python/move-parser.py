@@ -1,4 +1,4 @@
-#  ----------- Begin code for moves-array.txt -----------
+#  ----------- Begin code for creating moves-array.txt -----------
 
 
 # in_file = open('PBS/moves.txt')
