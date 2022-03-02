@@ -10,7 +10,7 @@ lines =  in_file.readlines();
 last = lines[-1]
 in_file.seek(0,0)
 
-out_file.write('INSERT INTO game_items (game_item_text_id, game_item_name, bag_pocket, game_item_price, game_item_description, in_battle_use_id, out_battle_use_id, special_items_use_id)\nVALUES\n')
+out_file.write('INSERT INTO game_items (game_item_id, game_item_name, bag_pocket, game_item_price, game_item_description, in_battle_use_id, out_battle_use_id, special_items_use_id)\nVALUES\n')
 
 tm_file.write('INSERT INTO technical_machines (game_item_id, move_id)\nVALUES\n')
 

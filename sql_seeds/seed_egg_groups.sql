@@ -1,4 +1,4 @@
-INSERT INTO egg_groups (egg_group_name)
+INSERT INTO egg_groups (egg_group_id)
 VALUES
 (Monster),
 (Humanlike),

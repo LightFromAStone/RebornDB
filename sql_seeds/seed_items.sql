@@ -1,4 +1,4 @@
-INSERT INTO game_items (game_item_text_id, game_item_name, bag_pocket, game_item_price, game_item_description, in_battle_use_id, out_battle_use_id, special_items_use_id)
+INSERT INTO game_items (game_item_id, game_item_name, bag_pocket, game_item_price, game_item_description, in_battle_use_id, out_battle_use_id, special_items_use_id)
 VALUES
 ("REPEL", "Repel", "Items", 400, "An item that prevents any low-level wild Pokémon from jumping out at you for 100 steps.", 3, 1, 1),
 ("SUPERREPEL", "Super Repel", "Items", 700, "An item that prevents any low-level wild Pokémon from jumping out at you for 200 steps.", 3, 1, 1),

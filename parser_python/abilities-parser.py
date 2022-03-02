@@ -6,7 +6,7 @@
 in_file = open('PBS/abilities.txt')
 out_file = open('../sql_seeds/seed_abilities.sql', 'w')
 
-out_file.write('INSERT INTO abilities (ability_text_id, ability_name, ability_description)\nVALUES\n')
+out_file.write('INSERT INTO abilities (ability_id, ability_name, ability_description)\nVALUES\n')
 
 # grab last line in file to use for comparisson later
 lines =  in_file.readlines();

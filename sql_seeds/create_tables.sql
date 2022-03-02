@@ -3,8 +3,7 @@ CREATE TYPE MOVECLASS AS ENUM ('Physical', 'Special', 'Status');
 CREATE TYPE POCKET AS ENUM ('Items', 'Medicine', 'Poke Balls', 'TMs & HMs', 'Berries', 'Mail', 'Battle Items', 'Key Items');
 
 CREATE TABLE pokemon_type (
-   pokemon_type_id SERIAL PRIMARY KEY,
-   pokemon_type_name VARCHAR(20)          
+   pokemon_type_id VARCHAR(20) PRIMARY KEY
 );
 
 CREATE TABLE in_battle_use (
@@ -45,8 +44,8 @@ CREATE TABLE pokemon_base (
 CREATE TABLE pokemon (
    pokemon_id VARCHAR(50) PRIMARY KEY,
    pokemon_base_id INT NOT NULL REFERENCES pokemon_base(pokemon_base_id),
-   pokemon_type_1 INT NOT NULL REFERENCES pokemon_type(pokemon_type_id),
-   pokemon_type_2 INT REFERENCES pokemon_type(pokemon_type_id)
+   pokemon_type_1 VARCHAR(20) NOT NULL REFERENCES pokemon_type(pokemon_type_id),
+   pokemon_type_2 VARCHAR(20) REFERENCES pokemon_type(pokemon_type_id)
 );
 
 CREATE TABLE wild_held_items (
@@ -95,7 +94,7 @@ CREATE TABLE evolutions (
    evolution_id SERIAL PRIMARY KEY,
    pokemon_id VARCHAR(50) NOT NULL REFERENCES pokemon(pokemon_id),
    evolves_into VARCHAR(50) NOT NULL REFERENCES pokemon(pokemon_id),
-   evolution_method VARCHAR(100)
+   evolution_method VARCHAR(200)
 );
 
 CREATE TABLE function_code (
@@ -109,7 +108,7 @@ CREATE TABLE moves (
    move_name VARCHAR(50) NOT NULL,
    function_code_id INT NOT NULL REFERENCES function_code(function_code_id),
    base_power INT NOT NULL,
-   move_type INT NOT NULL REFERENCES pokemon_type(pokemon_type_id),
+   move_type VARCHAR(20) NOT NULL REFERENCES pokemon_type(pokemon_type_id),
    damage_category MOVECLASS NOT NULL,
    accuracy NUMERIC(3, 2) NOT NULL,
    total_pp INT NOT NULL,
@@ -145,12 +144,17 @@ CREATE TABLE move_flags (
 );
 
 CREATE TABLE egg_groups (
-   egg_group_id SERIAL PRIMARY KEY,
-   egg_group_name VARCHAR(20) NOT NULL
+   egg_group_id VARCHAR(20) PRIMARY KEY
 );
 
 CREATE TABLE pokemon_egg_groups (
    pokemon_egg_group_id SERIAL PRIMARY KEY,
    pokemon_base_id INT NOT NULL REFERENCES pokemon_base(pokemon_base_id),
-   egg_group_id INT NOT NULL REFERENCES egg_groups(egg_group_id)
+   egg_group_id VARCHAR(20) NOT NULL REFERENCES egg_groups(egg_group_id)
+);
+
+CREATE TABLE feedback (
+   feedback_id SERIAL PRIMARY KEY,
+   feedback_name VARCHAR(50) NOT NULL,
+   feedback_content VARCHAR(2000)
 );

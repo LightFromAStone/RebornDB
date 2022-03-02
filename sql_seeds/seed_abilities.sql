@@ -1,4 +1,4 @@
-INSERT INTO abilities (ability_text_id, ability_name, ability_description)
+INSERT INTO abilities (ability_id, ability_name, ability_description)
 VALUES
 ("STENCH", "Stench", "Damaging a target makes it flinch by a small chance"),
 ("DRIZZLE", "Drizzle", "Summons rain for five turns when switching in"),
