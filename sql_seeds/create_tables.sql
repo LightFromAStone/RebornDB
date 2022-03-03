@@ -57,13 +57,13 @@ CREATE TABLE wild_held_items (
 
 CREATE TABLE effort_points (
    effort_points_id SERIAL PRIMARY KEY,
-   pokemon_base_id INT NOT NULL REFERENCES pokemon_base(pokemon_base_id),
+   pokemon_id INT NOT NULL REFERENCES pokemon(pokemon_id),
    ev_hp INT NOT NULL,
    ev_attack INT NOT NULL,
    ev_defense INT NOT NULL,
+   ev_speed INT NOT NULL
    ev_sp_attack INT NOT NULL,
    ev_sp_defense INT NOT NULL,
-   ev_speed INT NOT NULL
 );
 
 CREATE TABLE base_stats (
@@ -72,9 +72,9 @@ CREATE TABLE base_stats (
    hp INT NOT NULL,
    attack INT NOT NULL,
    defense INT NOT NULL,
+   speed INT NOT NULL
    sp_attack INT NOT NULL,
    sp_defense INT NOT NULL,
-   speed INT NOT NULL
 );
 
 CREATE TABLE abilities (
@@ -94,7 +94,8 @@ CREATE TABLE evolutions (
    evolution_id SERIAL PRIMARY KEY,
    pokemon_id VARCHAR(50) NOT NULL REFERENCES pokemon(pokemon_id),
    evolves_into VARCHAR(50) NOT NULL REFERENCES pokemon(pokemon_id),
-   evolution_method VARCHAR(200)
+   evolution_method VARCHAR(100) NOT NULL,
+   evolution_method_param VARCHAR(50)
 );
 
 CREATE TABLE function_code (
