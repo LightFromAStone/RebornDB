@@ -31,7 +31,7 @@ out_moves_pokemon = open('../sql_seeds/seed_pokemon_moves.sql', 'w')
 
 out_base_pokemon.write('INSERT INTO pokemon_base (pokemon_name, gender_rate, growth_type, catch_rate, hatch_steps)\nVALUES\n')
 
-out_pokemon.write('INSERT INTO pokemon (pokemon_id, pokemon_base_id, pokemon_type_1, pokemon_type_2,)\nVALUES\n')
+out_pokemon.write('INSERT INTO pokemon (pokemon_id, pokemon_base_id, pokemon_type_1, pokemon_type_2)\nVALUES\n')
 
 out_wild_items.write('INSERT INTO wild_held_items (game_item_id, pokemon_id, held_chance)\nVALUES\n')
 
@@ -45,7 +45,7 @@ out_evolutions.write('INSERT INTO evolutions (pokemon_id, evolves_into, evolutio
 
 out_egg_groups_pokemon.write('INSERT INTO pokemon_egg_groups (pokemon_base_id, egg_group_id)\nVALUES\n')
 
-out_moves_pokemon.write('INSERT INTO pokemon_move (pokemon_id, move_id, learn_method)\nVALUES\n')
+out_moves_pokemon.write('INSERT INTO pokemon_moves (pokemon_id, move_id, learn_method)\nVALUES\n')
 
 # grab last line in file to use for comparisson later
 lines =  in_file.readlines();
@@ -75,20 +75,31 @@ wild_item_uncommon = '' # need to reset
 wild_item_rare = '' # need to reset
 evolutions = ''
 
+all_mons_array = []
+all_types_array = ['NORMAL','FIRE','WATER','ELECTRIC','GRASS','ICE','FIGHTING','POISON','GROUND','FLYING','PSYCHIC','BUG','ROCK','GHOST','DRAGON','DARK', 'STEEL', 'FAIRY']
+
 for line in in_file:
    line = line.rstrip()
    line = line.lstrip()
    if line.count('InternalName='):
       id = line.replace('InternalName=', '')
+      if id not in all_mons_array:
+         all_mons_array.append(id)
+      else:
+         print(f'{id} has a duplicate')
       
    elif line.count('Name='):
-      name = line.replace('Name=', '')
+      name = line.replace('Name=', '').replace("'", "''")
       
    elif line.count('Type1='):
       type_1 = line.replace('Type1=', '')
+      if type_1 not in all_types_array:
+         print(f'{type_1} is not in array')
       
    elif line.count('Type2='):
       type_2 = line.replace('Type2=', '')
+      if type_2 not in all_types_array:
+         print(f'{type_2} is not in array')
       
    elif line.count('BaseStats='):
       base_stats = line.replace('BaseStats=', '')
@@ -150,15 +161,15 @@ for line in in_file:
          elif growth_rate == 'Parabolic':
             growth_rate = 'Medium Slow'
          
-         out_base_pokemon.write(f'("{name}", {gender_rate_to_float(gender_rate)}, "{growth_rate}", {rareness}, {hatch_steps}){end_chars}')
+         out_base_pokemon.write(f"('{name}', {gender_rate_to_float(gender_rate)}, '{growth_rate}', {rareness}, {hatch_steps}){end_chars}")
       
       # Create entry in pokemon table
       number_pkmn = number_pkmn.replace('[', '').replace(']', '').replace('A', '')
-      out_pokemon.write(f'("{id}", {number_pkmn}, "{type_1}", ')
+      out_pokemon.write(f"('{id}', {number_pkmn}, '{type_1}', ")
       if type_2 == '':
          out_pokemon.write(f'NULL){end_chars}')
       else:
-         out_pokemon.write(f'"{type_2}"){end_chars}')
+         out_pokemon.write(f"'{type_2}'){end_chars}")
          type_2 = '' # reset type_2 in case next pokemon only has one type
       
       # Create entry in wild_held_items table if needed
@@ -175,7 +186,7 @@ for line in in_file:
          else:
             chance = 0.01
             item = wild_item_rare
-         out_wild_items.write(f'("{item}", "{id}", {chance}),\n')
+         out_wild_items.write(f"('{item}', '{id}', {chance}),\n")
          # reset wild item variables
          wild_item_common = ''
          wild_item_uncommon = ''
@@ -183,19 +194,19 @@ for line in in_file:
       
       # Create entry for effort_points table
       points = effort_points.split(',')
-      out_effort_points.write(f'("{id}", {points[0]}, {points[1]}, {points[2]}, {points[3]}, {points[4]}, {points[5]}){end_chars}')
+      out_effort_points.write(f"('{id}', {points[0]}, {points[1]}, {points[2]}, {points[3]}, {points[4]}, {points[5]}){end_chars}")
       
       # Create entry in base_stats table
       stats = base_stats.split(',')
-      out_base_stats.write(f'("{id}", {stats[0]}, {stats[1]}, {stats[2]}, {stats[3]}, {stats[4]}, {stats[5]}){end_chars}')
+      out_base_stats.write(f"('{id}', {stats[0]}, {stats[1]}, {stats[2]}, {stats[3]}, {stats[4]}, {stats[5]}){end_chars}")
       
       # Create entries for pokemon_abilities table
       if hidden_ability:
-         out_abilities_pokemon.write(f'("{id}", "{hidden_ability}", TRUE),\n')
+         out_abilities_pokemon.write(f"('{id}', '{hidden_ability}', TRUE),\n")
          hidden_ability = '' # reset in case next pokemon has no hidden ability
       ability = abilities.split(',')
       for a in ability:
-         out_abilities_pokemon.write(f'("{id}", "{a}", FALSE)')
+         out_abilities_pokemon.write(f"('{id}', '{a}', FALSE)")
          if number_pkmn == final_pkmn and a == ability[-1]:
             out_abilities_pokemon.write(';')
          else:
@@ -207,9 +218,9 @@ for line in in_file:
          data_length = len(data)
          count =  0
          while count < data_length:
-            out_evolutions.write(f'("{id}", "{data[count]}", "{data[count + 1]}", ')
+            out_evolutions.write(f"('{id}', '{data[count]}', '{data[count + 1]}', ")
             if data[count + 2]:
-               out_evolutions.write(f'"{data[count + 2]}")')
+               out_evolutions.write(f"'{data[count + 2]}')")
             else:
                out_evolutions.write('NULL)')
             count += 3
@@ -222,34 +233,28 @@ for line in in_file:
       
       # Create entries in pokemon_egg_groups
       group = egg_groups.split(',')
-      out_egg_groups_pokemon.write(f'({number_pkmn}, "{group[0]}"){end_chars}')
+      out_egg_groups_pokemon.write(f"({number_pkmn}, '{group[0]}'){end_chars}")
       if len(group) == 2:
-         out_egg_groups_pokemon.write(f'({number_pkmn}, "{group[1]}"){end_chars}')
+         out_egg_groups_pokemon.write(f"({number_pkmn}, '{group[1]}'){end_chars}")
          
       # Create entries in pokemon_moves table
       move_data = moves.split(',')
       move_data_length = len(move_data)
       count = 0
       while count < move_data_length:
-         out_moves_pokemon.write(f'("{id}", "{move_data[count + 1]}", "{move_data[count]}"),\n')
+         out_moves_pokemon.write(f"('{id}', '{move_data[count + 1]}', '{move_data[count]}'),\n")
          count += 2
       
       egg_data = egg_moves.split(',')
       for move in egg_data:
-         out_moves_pokemon.write(f'("{id}", "{move}", "EGG"),\n')
+         out_moves_pokemon.write(f"('{id}', '{move}', 'EGG'),\n")
             
-      
-      
-      
-      
+                     
       number_pkmn = line.replace('[', '').replace(']', '')
          
       
-   
-   
-   
-   
-   
+out_mons = open('all-pkmn.txt', 'w')   
+out_mons.write(f'{all_mons_array}')
  
  
  

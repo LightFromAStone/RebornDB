@@ -17,7 +17,7 @@ CREATE TABLE out_battle_use (
 );
 
 CREATE TABLE special_items_use (
-   special_items_use_id SERIAL PRIMARY Key,
+   special_items_use_id SERIAL PRIMARY KEY,
    useability_definition VARCHAR(300) NOT NULL
 );
 
@@ -57,13 +57,13 @@ CREATE TABLE wild_held_items (
 
 CREATE TABLE effort_points (
    effort_points_id SERIAL PRIMARY KEY,
-   pokemon_id INT NOT NULL REFERENCES pokemon(pokemon_id),
+   pokemon_id VARCHAR(50) NOT NULL REFERENCES pokemon(pokemon_id),
    ev_hp INT NOT NULL,
    ev_attack INT NOT NULL,
    ev_defense INT NOT NULL,
-   ev_speed INT NOT NULL
+   ev_speed INT NOT NULL,
    ev_sp_attack INT NOT NULL,
-   ev_sp_defense INT NOT NULL,
+   ev_sp_defense INT NOT NULL
 );
 
 CREATE TABLE base_stats (
@@ -72,9 +72,9 @@ CREATE TABLE base_stats (
    hp INT NOT NULL,
    attack INT NOT NULL,
    defense INT NOT NULL,
-   speed INT NOT NULL
+   speed INT NOT NULL,
    sp_attack INT NOT NULL,
-   sp_defense INT NOT NULL,
+   sp_defense INT NOT NULL
 );
 
 CREATE TABLE abilities (
@@ -98,15 +98,15 @@ CREATE TABLE evolutions (
    evolution_method_param VARCHAR(50)
 );
 
-CREATE TABLE function_code (
+CREATE TABLE function_codes (
    function_code_id CHAR(3) PRIMARY KEY,
-   function_code_description VARCHAR(500)
+   function_code_description VARCHAR(1500)
 );
 
 CREATE TABLE moves (
    move_id VARCHAR(50) PRIMARY KEY,
    move_name VARCHAR(50) NOT NULL,
-   function_code_id CHAR(3) NOT NULL REFERENCES function_code(function_code_id),
+   function_code_id CHAR(3) NOT NULL REFERENCES function_codes(function_code_id),
    base_power INT NOT NULL,
    move_type VARCHAR(20) NOT NULL REFERENCES pokemon_type(pokemon_type_id),
    damage_category MOVECLASS NOT NULL,
@@ -133,7 +133,7 @@ CREATE TABLE technical_machines (
 CREATE TABLE flags (
    flag_id SERIAL PRIMARY KEY,
    flag_value CHAR(1) NOT NULL,
-   flag_description VARCHAR(100) NOT NULL
+   flag_description VARCHAR(200) NOT NULL
 );
 
 CREATE TABLE move_flags (

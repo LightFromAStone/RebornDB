@@ -18,8 +18,11 @@ for line in in_file:
    split_values = line.split(',', 3) # only split to the 3rd comma
    split_values[3] = split_values[3].replace('"', '')
    split_values[3] = split_values[3][:-1] # this line removes the period at the end of each string
-   
-   out_file.write(f'("{split_values[1]}", "{split_values[2]}", "{split_values[3]}")')
+   if split_values[2].count("'"):
+      split_values[2] = split_values[2].replace("'", "''")
+   if split_values[3].count("'"):
+      split_values[3] = split_values[3].replace("'", "''")
+   out_file.write(f"('{split_values[1]}', '{split_values[2]}', '{split_values[3]}')")
    if line != last:
       out_file.write(',\n')
    else:

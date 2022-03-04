@@ -49,14 +49,17 @@ for line in in_file:
    if(len(split_one[1]) > 30 or len(split_one[2]) > 30):
       print('FAILURE --- Item name is too long')
       break
-   else: 
-      out_file.write(f'("{split_one[1]}", "{split_one[2]}", "{pockets[int(split_one[3])]}", {int(split_one[4])}, ')
+   else:
+      if split_one[2].count("'"):
+         split_one[2] = split_one[2].replace("'", "''") 
+      out_file.write(f"('{split_one[1]}', '{split_one[2]}', '{pockets[int(split_one[3])]}', {int(split_one[4])}, ")
    
    if (len(split_for_description[1]) > 200):
       print('FAILURE --- description is too long')
       break
    else:
-      out_file.write(f'"{split_for_description[1]}", {int(split_two[1]) + 1}, {int(split_two[2]) + 1}, {int(split_two[3]) + 1}')
+      split_for_description[1] = split_for_description[1].replace("'", "''")
+      out_file.write(f"'{split_for_description[1]}', {int(split_two[1]) + 1}, {int(split_two[2]) + 1}, {int(split_two[3]) + 1}")
    
    if(line == last):
       out_file.write(');')
@@ -64,7 +67,7 @@ for line in in_file:
       out_file.write('),\n')
       
    if (len(split_two) > 4 and split_two[4] != ""):
-      tm_file.write(f'({split_one[1]}, "{split_two[4]}"),\n')
+      tm_file.write(f"('{split_one[1]}', '{split_two[4]}'),\n")
    
    
 in_file.close()

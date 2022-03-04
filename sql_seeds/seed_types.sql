@@ -1,4 +1,4 @@
-INSERT INTO pokemon_types (pokemon_type_id)
+INSERT INTO pokemon_type (pokemon_type_id)
 VALUES
 ('NORMAL'),
 ('FIRE'),
