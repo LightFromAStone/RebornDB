@@ -39,7 +39,7 @@ body {
    text-align: center;
 }
 
-#poke-title {
+#current-pkmn {
    width: 100%;
    text-align: center;
 }
@@ -66,4 +66,8 @@ body {
    grid-column: 1 / span 4;
    grid-row: row5-start;
    background-color: #6b6d76;
+}
+
+.poke-card {
+   background-color: #F1F2EE;
 }

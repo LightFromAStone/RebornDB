@@ -13,10 +13,11 @@
       <header class="grid-row-1">
          <nav>
             <ul class="nav-list">
-               <li>Pokedex</li>
-               <li>Items</li>
+               <li><a href="pokedex.html">Pokedex</a></li>
+               <li>Feedback</li>
+               <!-- <li>Items</li>
                <li>Abilities</li>
-               <li>Natures</li>
+               <li>Natures</li> -->
             </ul>
          </nav>
       </header>
@@ -24,39 +25,37 @@
          <div class="container" id="poke-header">
             <div class="page-turn" >
                <a href="">
-                  <div>
-                     <span><</span>
-                     <span>#025</span>
-                     <span>Pikachu</span>
-                  </div>
+                  <div id="prev-pkmn"></div>
                </a>
             </div>            
             <div class="page-turn">
                <a href="">
-                  <div>
-                     <span>Sandshrew</span>
-                     <span>#027</span>
-                     <span>></span>
-                  </div>
+                  <div id="next-pkmn"></div>
                </a>
             </div>            
          </div>
-         <div id="poke-title">
-            <span>Raichu</span>
-            <span>#026</span>
-         </div>
+         <div id="current-pkmn"></div>
       </section>
       <section class="grid-row-3">
          <div>
-            <div>
+            <div id="pkmn-profile-pic">
                <img src="https://img.pokemondb.net/artwork/raichu.jpg" alt="Raichu">
             </div>
+            <div id="pkmn-types"></div>
+            <div id="pkmn-abilities"></div>
+            <div id="general-info"></div>
+            <div id="pkmn-stats"></div>
+            <div id="pkmn-evolutions"></div>
          </div>
       </section>
-      <section class="grid-row-4">R4</section>
+      <section class="grid-row-4">R4
+         <button id="show-moves">Show Moves</button>
+         <div id="pkmn-moves"></div>
+      </section>
       <footer class="grid-row-5">R5</footer>
    </div>
 
-   <script src="main.js"></script>
+   <script src="../node_modules/axios/dist/axios.min.js"></script>
+   <script src="dexEntry.js"></script>
 </body>
 </html>
