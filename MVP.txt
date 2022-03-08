@@ -1,7 +1,7 @@
 --- MVP ---
 - User can see a list of all Pokemon
 - Each Pokemon has its own page with info about it (ONLY info relevant to Pkmn Reborn)
-- User can click on a move to get inline info about the move and what other Pokemon learn that move
+- User can click on a move to get inline info about the move
 - User can submit feedback (report incorrect or missing info, request a feature, etc.)
 
 - Name -

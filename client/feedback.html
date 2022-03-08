@@ -14,7 +14,7 @@
          <nav>
             <ul class="nav-list">
                <li><a href="pokedex.html">Pokedex</a></li>
-               <li><a href="./feedback.html">Feedback</a></li>
+               <li><a href="feedback.html">Feedback</a></li>
                <!-- <li>Items</li>
                <li>Abilities</li>
                <li>Natures</li> -->
@@ -22,15 +22,22 @@
          </nav>
       </header>
 
+      <section id="all-feedback">
+         
+      </section>
+
       <section>
-         <!-- <button id="load-pokedex">Load Dex</button> -->
-         <div id="pokedex-head"></div>
+         <form id="feedback-form" action="submit">
+            <input id="feedback-name" type="text" placeholder="anonymous">
+            <textarea id="feedback-content" cols="30" rows="10" placeholder="...Mediocre job!"></textarea>
+            <button>Submit Feedback</button>
+         </form>
       </section>
 
    </div>
 
 
    <script src="../node_modules/axios/dist/axios.min.js"></script>
-   <script src="main.js"></script>
+   <script src="feedback.js"></script>
 </body>
 </html>

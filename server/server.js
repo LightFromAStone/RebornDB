@@ -8,7 +8,11 @@ const {
    getPokemonIdNumber,
    getPokemonName,
    getMainDexEntry,
-   getPokemonAbilities
+   getPokemonAbilities,
+   getPokemonStats,
+   getPokemonMoves,
+   getFeedback,
+   addFeedback
 } = require('./controller.js');
 
 app.use(express.json());
@@ -19,6 +23,11 @@ app.get('/pokemonDexNum/:name', getPokemonIdNumber);
 app.get('/pokemonName/:id', getPokemonName);
 app.get('/dexEntry/:id', getMainDexEntry);
 app.get('/pokemonAbilities/:id', getPokemonAbilities);
+app.get('/pokemonStats/:id', getPokemonStats);
+app.get('/pokemonMoves/:id', getPokemonMoves);
+app.get('/feedback', getFeedback);
+
+app.post('/feedback', addFeedback);
 
 
 app.listen(SERVER_PORT, () => console.log(`up on ${SERVER_PORT}`))

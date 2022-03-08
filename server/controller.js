@@ -38,12 +38,6 @@ module.exports = {
       .catch(err => console.log(err))
    },
 
-
-//    SELECT name, employees.dept_code, departments.dept_code, dept
-// FROM employees
-//   JOIN departments
-//     ON employees.dept_code = departments.dept_code;
-
    getPokemonAbilities: (req, res) => {
       sequelize.query(`SELECT abilities.ability_name, abilities.ability_description 
       FROM pokemon_abilities 
@@ -53,32 +47,39 @@ module.exports = {
       .catch(err => console.log(err))
    },
 
-   getPokemonTypes: (req, res) => {
-
-   },
-
    getPokemonStats: (req, res) => {
-
+      sequelize.query(`SELECT hp, attack, defense, speed, sp_attack, sp_defense 
+      FROM base_stats WHERE pokemon_id = '${req.params.id}'`)
+      .then(dbRes => res.status(200).send(dbRes[0]))
+      .catch(err => console.log(err))
    },
 
    getEvolutions: (req, res) => {
 
    },
 
-   getLevelMoves: (req, res) => {
-
+   getPokemonMoves: (req, res) => {
+      sequelize.query(`SELECT a.learn_method, b.move_name, b.base_power, b.move_type, b.damage_category, b.accuracy, b.total_pp, b.effect_chance, b.move_description 
+      FROM pokemon_moves AS a 
+      JOIN moves AS b ON a.move_id = b.move_id 
+      WHERE a.pokemon_id = '${req.params.id}'`)
+      .then(dbRes => res.status(200).send(dbRes[0]))
+      .catch(err => console.log(err))
    },
 
-   getEggMoves: (req, res) => {
-
+   getFeedback: (req, res) => {
+      sequelize.query(`SELECT feedback_name, feedback_content FROM feedback`)
+      .then(dbRes => res.status(200).send(dbRes[0]))
+      .catch(err => console.log(err))
    },
 
-   getMachineMoves: (req, res) => {
-
-   },
-
-   getTutorMoves: (req, res) => {
-
+   addFeedback: (req, res) => {
+      let {name, content} = req.body;
+      sequelize.query(`INSERT INTO feedback (feedback_name, feedback_content) 
+      VALUES
+      ('${name}', '${content}');`)
+      .then(dbRes => res.status(200).send(dbRes[0]))
+      .catch(err => console.log(err))
    }
 
 };

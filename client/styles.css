@@ -2,6 +2,14 @@ body {
    background-color: #0C0F0A;
 }
 
+button {
+   cursor: pointer;
+}
+
+span {
+   margin-right: 0.5rem;
+}
+
 .nav-list {
    display: flex;
    justify-content: center;
@@ -9,6 +17,10 @@ body {
 
 .nav-list > li {
    margin: 5rem 2rem 0.5rem 2rem;
+}
+
+.hidden {
+   display: none;
 }
 
 .grid-container {
@@ -37,6 +49,7 @@ body {
    width: 100%;
    background-color: red;
    text-align: center;
+   cursor: pointer;
 }
 
 #current-pkmn {
@@ -50,6 +63,10 @@ body {
    max-width: 1200px;
    background-color: #F1F2EE;
 
+}
+
+#pkmn-profile-pic > img {
+   max-width: 400px;
 }
 
 .grid-row-4 {
@@ -69,5 +86,9 @@ body {
 }
 
 .poke-card {
+   background-color: #F1F2EE;
+}
+
+#all-feedback {
    background-color: #F1F2EE;
 }
