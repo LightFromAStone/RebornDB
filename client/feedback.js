@@ -13,7 +13,6 @@ function showFeedback() {
       }
    })
    .catch(err => console.log(err));
-   console.log('feedback loading');
 }
 
 function submitFeedback(event) {

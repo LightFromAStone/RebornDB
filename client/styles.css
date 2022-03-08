@@ -1,5 +1,12 @@
+html, body {
+   height: 100%;
+ }
+
 body {
    background-color: #0C0F0A;
+   display: flex;
+   flex-direction: column;
+
 }
 
 button {
@@ -16,7 +23,7 @@ span {
 }
 
 .nav-list > li {
-   margin: 5rem 2rem 0.5rem 2rem;
+   margin: 3rem 2rem 0.5rem 2rem;
 }
 
 .hidden {
@@ -25,6 +32,7 @@ span {
 
 .grid-container {
    display: grid;
+   height: 100vh;
    grid-template-columns: [col1-start] auto [col2-start] 37.5% [col3-start] 37.5% [col4-start] auto;
    grid-template-rows: [row1-start] auto [row2-start] auto [row3-start] auto [row4-start] auto [row4-start] auto;
 }
@@ -33,6 +41,7 @@ span {
    grid-column: 1 / span 4;
    grid-row: row1-start / row2-start;
    background-color: #6b6d76;
+   max-height: 5rem;
 }
 
 .grid-row-2 {
@@ -76,13 +85,17 @@ span {
 }
 
 .grid-row-5 {
-   position: absolute;
-   bottom: 0;
+   /* position: absolute; */
+   /* bottom: 0; */
+   max-height: 1rem;
    width: 100%;
    /* may be able to remove above three properties if content permits */
    grid-column: 1 / span 4;
    grid-row: row5-start;
    background-color: #6b6d76;
+   display: flex;
+   justify-content: center;
+   flex-shrink: 0;
 }
 
 .poke-card {
@@ -92,3 +105,4 @@ span {
 #all-feedback {
    background-color: #F1F2EE;
 }
+
