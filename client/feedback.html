@@ -5,36 +5,43 @@
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="reset.css">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet"> 
    <link rel="stylesheet" href="styles.css">
    <title>Document</title>
 </head>
 <body>
-   <div class="grid-container">
-      <header class="grid-row-1">
-         <nav>
-            <ul class="nav-list">
-               <li><a href="pokedex.html">Pokedex</a></li>
-               <li><a href="feedback.html">Feedback</a></li>
-               <!-- <li>Items</li>
-               <li>Abilities</li>
-               <li>Natures</li> -->
-            </ul>
-         </nav>
-      </header>
-         <section class="grid-row-2" id="all-feedback">
-            
-         </section>
+   <header>
+      <div class="logo-container">
+         <img id="reborn-logo" src="../ImageGallery/reborn_logo.png" alt="reborn logo">
+         <h1>Database</h1>
+      </div>
+      <nav>
+         <ul class="nav-list">
+            <li><a href="index.html">Pokedex</a></li>
+            <li><a href="feedback.html">Feedback</a></li>
+            <!-- <li>Items</li>
+            <li>Abilities</li>
+            <li>Natures</li> -->
+         </ul>
+      </nav>
+   </header>
+
+   <div class="container">
+      <main id="feedback-container">
+         <section id="all-feedback"></section>
    
-         <section class="grid-row-3">
+         <section>
             <form id="feedback-form" action="submit">
                <input id="feedback-name" type="text" placeholder="anonymous">
-               <textarea id="feedback-content" cols="30" rows="10" placeholder="...Mediocre job!"></textarea>
+               <textarea id="feedback-content" cols="30" rows="10" maxlength="2000" placeholder="...Mediocre job!"></textarea>
                <button>Submit Feedback</button>
             </form>
          </section>
-
-      <footer class="grid-row-5">R5</footer>
+      </main>
    </div>
+
+   <footer><div>Not affiliated with The Pokemon Company</div></footer>
 
 
    <script src="../node_modules/axios/dist/axios.min.js"></script>

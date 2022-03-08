@@ -62,9 +62,9 @@ function setMainPkmnData(pkmnId) {
          } = res.data[0];
       
          let types = document.getElementById('pkmn-types');
-         types.innerHTML = `<div>${pokemon_type_1}</div>`;
+         types.innerHTML = `<span>${pokemon_type_1}</span>`;
          if (pokemon_type_2 !== null) {
-            let type2 = document.createElement('div');
+            let type2 = document.createElement('span');
             type2.innerText = pokemon_type_2;
             types.appendChild(type2);
          }

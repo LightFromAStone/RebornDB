@@ -14,7 +14,7 @@ function displayPokedex() {
          for (let i = 0; i < res.data.length; i++) {
             const container = document.createElement('div');
             const pokemonCard = document.createElement('a');
-            pokemonCard.href = 'index.html';
+            pokemonCard.href = 'dex-entry.html';
             pokemonCard.className = 'poke-card';
             pokemonCard.id = `${res.data[i].pokemon_base_id}_${res.data[i].pokemon_name}`;
             pokemonCard.addEventListener('click', selectPokemon);

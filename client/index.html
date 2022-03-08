@@ -5,53 +5,40 @@
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="reset.css">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet"> 
    <link rel="stylesheet" href="styles.css">
    <title>Document</title>
 </head>
 <body>
-   <div class="grid-container">
-      <header class="grid-row-1">
-         <nav>
-            <ul class="nav-list">
-               <li><a href="pokedex.html">Pokedex</a></li>
-               <li><a href="feedback.html">Feedback</a></li>
-               <!-- <li>Items</li>
-               <li>Abilities</li>
-               <li>Natures</li> -->
-            </ul>
-         </nav>
-      </header>
-      <section class="grid-row-2">
-         <div class="container" id="poke-header">
-            <div class="page-turn" >
-               <div id="prev-pkmn"></div>
-            </div>            
-            <div class="page-turn">
-               <div id="next-pkmn"></div>
-            </div>            
-         </div>
-         <div id="current-pkmn"></div>
-      </section>
-      <section class="grid-row-3">
-         <div>
-            <div id="pkmn-profile-pic">
-               <img src="" alt="">
-            </div>
-            <div id="pkmn-types"></div>
-            <div id="pkmn-abilities"></div>
-            <div id="general-info"></div>
-            <div id="pkmn-stats"></div>
-            <div id="pkmn-evolutions"></div>
-         </div>
-      </section>
-      <section class="grid-row-4">
-         <button id="show-moves-btn">Show Moves</button>
-         <div class="hidden" id="pkmn-moves"></div>
-      </section>
-      <footer class="grid-row-5">R5</footer>
-   </div>
+   <header>
+      <div class="logo-container">
+         <img id="reborn-logo" src="../ImageGallery/reborn_logo.png" alt="reborn logo">
+         <h1>Database</h1>
+      </div>
+      <nav>
+         <ul class="nav-list">
+            <li><a href="index.html">Pokedex</a></li>
+            <li><a href="feedback.html">Feedback</a></li>
+            <!-- <li>Items</li>
+            <li>Abilities</li>
+            <li>Natures</li> -->
+         </ul>
+      </nav>
+   </header>
 
-   <script src="../node_modules/axios/dist/axios.min.js"></script>
-   <script src="dexEntry.js"></script>
+   <div class="container">
+      <main>
+         <section>
+            <div id="pokedex-head"></div>
+         </section>
+      </main>
+   </div>
+   
+      <footer><div>Not affiliated with The Pokemon Company</div></footer>
+   
+      <script src="../node_modules/axios/dist/axios.min.js"></script>
+      <script src="main.js"></script>
 </body>
 </html>

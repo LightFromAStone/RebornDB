@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="reset.css">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet"> 
+   <link rel="stylesheet" href="styles.css">
+   <title>Document</title>
+</head>
+<body>
+   <header>
+      <div class="logo-container">
+         <img id="reborn-logo" src="../ImageGallery/reborn_logo.png" alt="reborn logo">
+         <h1>Database</h1>
+      </div>
+      <nav>
+         <ul class="nav-list">
+            <li><a href="index.html">Pokedex</a></li>
+            <li><a href="feedback.html">Feedback</a></li>
+            <!-- <li>Items</li>
+            <li>Abilities</li>
+            <li>Natures</li> -->
+         </ul>
+      </nav>
+   </header>
+
+   <div class="container">
+      <main id="dex-entry-container">
+         <section class="dex-section">
+            <div id="poke-header">
+               <div class="page-turn" >
+                  <div id="prev-pkmn"></div>
+               </div>            
+               <div class="page-turn">
+                  <div id="next-pkmn"></div>
+               </div>            
+            </div>
+            <div id="current-pkmn"></div>
+         </section>
+   
+         <section class="dex-section">
+            <div class="dex-items">
+               <div id="pkmn-profile-pic">
+                  <img src="" alt="">
+                  <div id="pkmn-types"></div>
+               </div>
+               <div id="grouped-pkmn-info">
+                  <div id="general-info"></div>
+                  <br><br>
+                  <div id="pkmn-abilities"></div>
+               </div>
+               <div id="pkmn-stats"></div>
+               <!-- <div id="pkmn-evolutions"></div> -->
+            </div>
+         </section>
+   
+         <section class="dex-section">
+            <button id="show-moves-btn">Show Moves</button>
+            <div class="hidden" id="pkmn-moves"></div>
+         </section>
+      </main>     
+   </div>
+
+   <footer><div>Not affiliated with The Pokemon Company</div></footer>
+
+   <script src="../node_modules/axios/dist/axios.min.js"></script>
+   <script src="dexEntry.js"></script>
+</body>
+</html>
